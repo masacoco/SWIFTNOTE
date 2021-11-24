@@ -205,3 +205,119 @@ print(sports)
 
 var emptyArray = [String]()
 print(emptyArray)
+
+
+//辞書：キーと値のペアを持つ複数の値を収納できるデータ構造
+//var 変数名 = [
+//    キー：値
+//    キー：値
+//    キー：値
+//]
+
+var occupations = [
+    "ひろし": "詩人",
+    "たつひろ":"経営者",
+    "よしのぶ":"数学者",
+    "まさお":"天才"
+]
+
+print(occupations["まさお"]!)
+
+//辞書に要素をつけたい場合
+//辞書の名前[付け加えたいキー]　= 付け加えたい値
+
+occupations["のぶさだ"] = "哲学者"
+
+print(occupations)
+
+//空の辞書
+//var 変数名 = [キーの型:値の型]()
+
+var emptyDictionary = [String:Int]()
+
+print(emptyDictionary)
+
+
+//for-inとは、繰り返し処理を行う文法
+//シーケンスとは、複数の値で一つづつ段階的に処理できる値のこと。EX：配列や数値範囲
+//for 変数 in シーケンス（）{
+//    繰り返したい処理
+//}
+
+//配列
+var names = ["太郎","二郎","三郎","四郎"]
+
+for name in names{
+    print(name)
+}
+
+
+//範囲演算子...
+//閉区間（両端を含む区間のこと）
+for i in 1...10{
+    print(i)
+}
+
+//半開区間
+//0..<10 = 0...9
+for i in 1..<10{
+    print(i)
+}
+
+//関数：処理をまとめたもの
+//func 関数名（引数：引数の型）-> 戻り値の型{
+//    return 戻り値
+//}
+//関数（引数）
+
+
+func Hello(name:String) -> String{
+    return "こんにちは、\(name)さん!"
+}
+
+print(Hello(name:"もぎ"))
+
+//複数の引数、戻り値ありの関数
+//func 関数名（引数1:引数１の型,引数2:引数2の型,引数3:引数3の型）->戻り値の型{
+//    return 戻り値
+//}
+//関数（引数）
+
+func Hello(name1:String,name2:String,name3:String) -> String{
+    return "こんにちは、\(name1)さん,\(name2)さん,\(name3)さん"
+}
+print(Hello(name1:"田中",name2:"山本",name3:"森安"))
+
+//引数も戻り値もない関数
+//func 関数名(){
+//    処理
+//}
+
+func HelloWorld(){
+    print("Hello,World!")
+}
+HelloWorld()
+
+
+//クロージャとは、簡略した名前のない関数。
+//わざわざ関数を定義するまでもないときに使う
+
+//{(引数:引数の型)->戻り値の型 in 戻り値}
+//print(クロージャが格納された定数（引数）)
+
+
+//let Hello = {(name:String)->String in
+//    return "こんにちは！\(name)さん"
+//}
+//print(Hello("山田"))
+
+//引数を省略する場合
+//let Hello = {()->String in
+//    return "こんにちは！田中さん"
+//}
+//print(Hello())
+
+
+//戻り値を省略
+let Hello = {print("こんにちは！田中さん")}
+Hello()
