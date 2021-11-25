@@ -321,3 +321,238 @@ HelloWorld()
 //戻り値を省略
 let Hello = {print("こんにちは！田中さん")}
 Hello()
+
+//クラス：設計図のようなもの。クラスを使ってインスタンスを作ることで使える。
+//インスタンスはクラスをもとにして作った実体
+//プロパティ：クラスないの変数や定数
+//メゾット：クラスないの関数
+//class クラス名{
+//    プロパティ１
+//    メゾット１...
+//}
+//インスタンス
+//var　変数名　= クラス名（）
+//インスタンス.プロパティ１
+//インスタンス.メゾット１
+
+//class Animal{
+//    var age = 2
+//    let kind = "犬"
+//
+//    func Bite(){
+//        print("\(age)歳の\(kind)が噛み付く")
+//    }
+//}
+//
+//var dog = Animal()
+//
+//print(dog.age)
+//print(dog.kind)
+//
+//dog.Bite()
+
+//イニシャライザ：インスタンスを作るときにプロパティに初期値を与えるもの
+//インスタンスに応じて値を変えるには、イニシャライザをつかう
+//init(プロパティ１：型, プロパティ２：型){
+//    self.プロパティ１ = プロパティ１
+//    self.プロパティ2 = プロパティ2
+//}
+
+class Animal{
+    var age:Int
+    let kind:String
+    
+    func Bite(){
+        print("\(age)歳の\(kind)が噛み付く")
+    }
+    
+    init(age:Int, kind:String){
+        self.age = age
+        self.kind = kind
+    }
+}
+
+var cat = Animal(age:3, kind: "猫")
+
+cat.Bite()
+
+
+//構造体：値をまとめて置くもの
+//struct 構造体名 {
+//    プロパティ１
+//    メゾット１...
+//}
+//
+//var インスタンス名　＝　構造体名（）
+//
+//インスタンス.プロパティ
+//インスタンス.メゾット
+
+
+//struct Animal2{
+//    let age = 5
+//    var kind = "犬"
+//
+//    func Bite(){
+//        print("\(age)歳の\(kind)が噛み付く")
+//    }
+//}
+//
+//var dog = Animal2()
+//dog.Bite()
+
+//イニシャライザも一緒
+//init(プロパティ１：型, プロパティ２：型){
+//    self.プロパティ１ = プロパティ１
+//    self.プロパティ2 = プロパティ2
+//}
+
+
+struct Animal2{
+    let age:Int
+    var kind:String
+    
+    func Bite(){
+        print("\(age)歳の\(kind)が噛み付く")
+    }
+    
+    init(age:Int, kind:String){
+        self.age = age
+        self.kind = kind
+    }
+}
+
+var panda = Animal2(age:10, kind:"パンダ")
+panda.Bite()
+
+//構造体配列
+//var 配列名:[構造体] = [
+//    構造体（）,
+//    構造体()
+//]
+
+var animals:[Animal]=[
+    Animal(age:10,kind:"トラ"),
+    Animal(age:20,kind:"人間"),
+    Animal(age:5,kind:"ヘビ")
+]
+
+animals[2].Bite()
+
+//プロトコル：構造体やクラスの実装を保証するもの
+//プロトコルで定義したプロパティやメゾットは必ず実装しないといけない
+//protocol プロトコル名{
+//    var プロパティ名:型 { get } getでプロパティを定数にできる。get setでプロパティを変数にしかできない
+//    func メゾット名（）
+//}
+
+//struct 構造体名：　プロトコル名{
+//    var プロトコルで定義したプロパティ：型
+//    func プロトコルで定義したメゾット(){
+//        処理内容
+//    }
+//}
+
+protocol Animal3 {
+    var age: Int{ get }
+    func bark()
+}
+
+struct Dog: Animal3 {
+    let age:Int
+    func bark(){
+        print("犬が吠える")
+    }
+}
+
+//do-catch:エラー処理をする時の構文
+
+//do{
+//    try エラーが出るかもしれない関数
+//}catch{
+//    エラーが出た時の処理
+//}
+
+import UIKit
+
+var canConnectServer = false
+
+func connectServer() throws{
+    if canConnectServer{
+        print("サーバーと接続")
+    }
+    else{
+        throw NSError()
+    }
+}
+
+func getData(){
+    do{
+        try connectServer()
+        print("データを取り出す")
+    } catch {
+       print("エラーの時の処理")
+   }
+}
+
+getData()
+
+
+//継承：クラスとプロパティやメゾットを引き継いで新しいクラスを作ること
+//継承元：superclass, 継承先:subclass
+//class クラス名：　継承元クラス{
+//
+//}
+
+class Monster{
+    var kind = "モンスター"
+    
+    func bodyBrow(){
+        print("たいあたり")
+    }
+}
+
+class Dragon: Monster{
+    func fireBreath(){
+        print("火を吹く")
+    }
+}
+
+class Slime: Monster{
+    func recovery(){
+        print("回復する")
+    }
+}
+
+var dragon = Dragon()
+print(dragon.kind)
+dragon.bodyBrow()
+dragon.fireBreath()
+
+var slime = Slime()
+print(slime.kind)
+slime.bodyBrow()
+slime.recovery()
+
+//as:型キャストをするためのもの
+//型キャストとは：インスタンスの型を他の型として扱うこと
+//ダウンキャストの場合はas! or as?を使います。
+//変数 as 継承元の型
+
+var any:Any = 1024
+var str:String = "String"
+var int: Int = 128
+
+//アップキャスト str→any int→any
+//var anyStr = str as Any
+//anyStr = any
+//print(anyStr)
+
+//as!:強制的にダウンキャストする
+//print(any as! Int)
+//print(any as! String)
+
+
+//as?：ダウンキャストが成功する場合はオプショナル型が、失敗するときはnil型が出る
+print(any as? Int)
+print(any as? String)
